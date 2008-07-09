@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<rss version="2.0">
+	<channel>
+		<title>Arcane Times RSS</title>
+		<link>http://www.arcanetimes.com/</link>
+		<description>Arcane Time Comic RSS feed - The art of Cheyenne Wright</description>
+		<generator><![CDATA[<a href="http://www.arcanetimes.com/">iStrip</a>]]></generator>
+		<language>en-gb</language>
+		<item>
+			<category>Comic</category>
+			<title>Latest strip - For our first year</title>
+			<description><![CDATA[<a href="http://www.arcanetimes.com/comic.php?strip_id=99"><img src="http://www.arcanetimes.com/istrip_files/strips/20071105.jpg" alt="For our first year" title="For our first year" width="900" height="687" border="0" /></a>]]></description>
+			<link>http://www.arcanetimes.com/comic.php?strip_id=99</link>
+			<pubDate>Mon, 05 Nov 2007 00:00:00 -0800</pubDate>
+		</item>
+	</channel>
+</rss><p align="center" style="color: #000000;"><small><span class="copyright">Hosted By <a href="http://rampagesession.com">The Rampage Network</a></span></small></p>

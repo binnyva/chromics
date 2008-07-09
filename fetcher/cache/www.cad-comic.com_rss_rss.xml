@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type='text/xsl' href='/_inc/rss_style.xsl' version='1.0'?>
+<rss version="2.0">
+	<channel>
+    <title>Ctrl+Alt+Del</title>
+    <link>http://www.cad-comic.com/</link>
+    <description>RSS for the popular comic Ctrl+Alt+Del</description>
+    <language>en-us</language>
+		<generator>CAD RSS Generator v1.0</generator>
+		<lastBuildDate>Wed,  9 Jul 2008 05:45:23 EDT</lastBuildDate>
+		<ttl>15</ttl>
+		<image>
+			<url>http://www.cad-comic.com/_common/images/CADlogo_144x82.jpg</url>
+			<title>CAD Logo</title>
+			<link>http://www.cad-comic.com/</link>
+			<width>144</width>
+			<height>82</height>
+		</image>
+		<category>Global</category>
+		<docs>http://blogs.law.harvard.edu/tech/rss</docs>
+  
+		<item>
+      <title>Comic: Reminders</title>
+      <category>Comic</category>
+      <pubDate>Wed,  9 Jul 2008 00:00:00 EDT</pubDate>
+      <link>http://cad-comic.com/comic.php?d=2008-07-09</link>
+	    <guid>http://cad-comic.com/comic.php?d=2008-07-09</guid>
+      <description>Reminders</description>
+			<author>tim@cad-comic.com (Tim Buckley)</author>
+    </item>
+				<item>
+      <title>News: Dan's Surgery</title>
+      <category>News</category>
+      <pubDate>Tue,  8 Jul 2008 00:00:00 EDT</pubDate>
+      <link>http://cad-comic.com/news.php?i=1673#1676</link>
+	    <guid>http://cad-comic.com/news.php?i=1673#1676</guid>
+      <description>Rob "Terarin" Strohmeyer, one of Dan's fellow BrushThralls, has posted an update on how Dan's surgery went today:"Terarin here with an update for a...</description>
+			<author>tim@cad-comic.com (Tim)</author>
+    </item>
+				<item>
+      <title>News: Tuesday Silly</title>
+      <category>News</category>
+      <pubDate>Tue,  8 Jul 2008 00:00:00 EDT</pubDate>
+      <link>http://cad-comic.com/news.php?i=1673#1675</link>
+	    <guid>http://cad-comic.com/news.php?i=1673#1675</guid>
+      <description></description>
+			<author>tim@cad-comic.com (Tim)</author>
+    </item>
+				<item>
+      <title>News: I need to ask you a favor</title>
+      <category>News</category>
+      <pubDate>Mon,  7 Jul 2008 00:00:00 EDT</pubDate>
+      <link>http://cad-comic.com/news.php?i=1673#1674</link>
+	    <guid>http://cad-comic.com/news.php?i=1673#1674</guid>
+      <description>Reposted from Saturday:I've mentioned a few times that I play Warmachine, a miniatures
+wargame. As a participant of the hobby, I've come to know t...</description>
+			<author>tim@cad-comic.com (Tim)</author>
+    </item>
+				<item>
+      <title>News: Kombatman.</title>
+      <category>News</category>
+      <pubDate>Mon,  7 Jul 2008 00:00:00 EDT</pubDate>
+      <link>http://cad-comic.com/news.php?i=1673#1673</link>
+	    <guid>http://cad-comic.com/news.php?i=1673#1673</guid>
+      <description>I'm looking forward to Mortal Kombat vs. DC Universe. I'd be happy with just a new, decent Mortal Kombat game, that the DC characters are there is ...</description>
+			<author>tim@cad-comic.com (Tim)</author>
+    </item>
+				<item>
+      <title>Comic: Totally decimated</title>
+      <category>Comic</category>
+      <pubDate>Mon,  7 Jul 2008 00:00:00 EDT</pubDate>
+      <link>http://cad-comic.com/comic.php?d=2008-07-07</link>
+	    <guid>http://cad-comic.com/comic.php?d=2008-07-07</guid>
+      <description>Totally decimated</description>
+			<author>tim@cad-comic.com (Tim Buckley)</author>
+    </item>
+				<item>
+      <title>News: Sunday Silly</title>
+      <category>News</category>
+      <pubDate>Sun,  6 Jul 2008 00:00:00 EDT</pubDate>
+      <link>http://cad-comic.com/news.php?i=1668#1672</link>
+	    <guid>http://cad-comic.com/news.php?i=1668#1672</guid>
+      <description></description>
+			<author>tim@cad-comic.com (Tim)</author>
+    </item>
+				<item>
+      <title>News: I need to ask you a favor</title>
+      <category>News</category>
+      <pubDate>Sat,  5 Jul 2008 00:00:00 EDT</pubDate>
+      <link>http://cad-comic.com/news.php?i=1668#1670</link>
+	    <guid>http://cad-comic.com/news.php?i=1668#1670</guid>
+      <description>I've mentioned a few times that I play Warmachine, a miniatures wargame. As a participant of the hobby, I've come to know the work of some of the m...</description>
+			<author>tim@cad-comic.com (Tim)</author>
+    </item>
+				<item>
+      <title>News: Saturday's Silly</title>
+      <category>News</category>
+      <pubDate>Fri,  4 Jul 2008 00:00:00 EDT</pubDate>
+      <link>http://cad-comic.com/news.php?i=1668#1669</link>
+	    <guid>http://cad-comic.com/news.php?i=1668#1669</guid>
+      <description>Here's Saturday's little strip. I'll be away for the holiday weekend, so I won't be around to upload it tomorrow.So if these become a regular (dail...</description>
+			<author>tim@cad-comic.com (Tim)</author>
+    </item>
+				<item>
+      <title>News: Fourth</title>
+      <category>News</category>
+      <pubDate>Fri,  4 Jul 2008 00:00:00 EDT</pubDate>
+      <link>http://cad-comic.com/news.php?i=1668#1668</link>
+	    <guid>http://cad-comic.com/news.php?i=1668#1668</guid>
+      <description> Happy Independence Day! And for the rest of the world... Happy... Friday.Remember that Players pinup art from a little while back? Well the s...</description>
+			<author>tim@cad-comic.com (Tim)</author>
+    </item>
+				<item>
+      <title>Comic: Ugly, ugly logic</title>
+      <category>Comic</category>
+      <pubDate>Fri,  4 Jul 2008 00:00:00 EDT</pubDate>
+      <link>http://cad-comic.com/comic.php?d=2008-07-04</link>
+	    <guid>http://cad-comic.com/comic.php?d=2008-07-04</guid>
+      <description>Ugly, ugly logic</description>
+			<author>tim@cad-comic.com (Tim Buckley)</author>
+    </item>
+				<item>
+      <title>News: It's in Belgium</title>
+      <category>News</category>
+      <pubDate>Thu,  3 Jul 2008 00:00:00 EDT</pubDate>
+      <link>http://cad-comic.com/news.php?i=1662#1667</link>
+	    <guid>http://cad-comic.com/news.php?i=1662#1667</guid>
+      <description>Saw In Bruges tonight. Pretty damn good.</description>
+			<author>tim@cad-comic.com (Tim)</author>
+    </item>
+				<item>
+      <title>News: Forums maintenance</title>
+      <category>News</category>
+      <pubDate>Wed,  2 Jul 2008 00:00:00 EDT</pubDate>
+      <link>http://cad-comic.com/news.php?i=1662#1666</link>
+	    <guid>http://cad-comic.com/news.php?i=1662#1666</guid>
+      <description>Hey folks. The CAD forums are going to be down until tomorrow while we do some maintenance on one of the servers handling it.In the meanwhile, I le...</description>
+			<author>pierre@cad-comic.com (Pierre)</author>
+    </item>
+				<item>
+      <title>News: Sillies, pt 2</title>
+      <category>News</category>
+      <pubDate>Wed,  2 Jul 2008 00:00:00 EDT</pubDate>
+      <link>http://cad-comic.com/news.php?i=1662#1665</link>
+	    <guid>http://cad-comic.com/news.php?i=1662#1665</guid>
+      <description>The feedback for the "mini" strips has been very positive. I'm not going to promise anything, but I think I'll try putting one up on each non-regul...</description>
+			<author>tim@cad-comic.com (Tim)</author>
+    </item>
+				<item>
+      <title>News: I am such a dirty, dirty liar</title>
+      <category>News</category>
+      <pubDate>Wed,  2 Jul 2008 00:00:00 EDT</pubDate>
+      <link>http://cad-comic.com/news.php?i=1662#1664</link>
+	    <guid>http://cad-comic.com/news.php?i=1662#1664</guid>
+      <description>Seems pretty obvious. Clearly they need to take a page from Blizzard's handbook and create some completely vague imagery to purposefully mindfuck t...</description>
+			<author>tim@cad-comic.com (Tim)</author>
+    </item>
+			</channel>
+</rss>

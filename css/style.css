@@ -1,0 +1,37 @@
+body {
+	margin:0px;
+	background:#fff;
+	color:#000;
+	font:76%/140% Verdana,Geneva,Arial,Helvetica,sans-serif;
+}
+a {
+	text-decoration:none;
+	color:blue;
+}
+label {
+	width:100px;
+	display:block;
+	float:left;
+	text-align:right;
+	padding-right:5px;
+}
+inupt, select {
+	float:left;
+}
+br {
+	clear:both;
+}
+
+/*Messages*/
+#warning-message,.warning {
+	font-weight:bold;
+	color:red;
+}
+#error-message,.error {
+	font-weight:bold;
+	color:red;
+}
+#success-message,.success {
+	font-weight:bold;
+	color:darkgreen;
+}
