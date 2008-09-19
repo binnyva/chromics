@@ -14,7 +14,7 @@ $feed = $data['rss']['channel'];
 
 //Find if the images are linked or embedded.
 $type = 'linked';
-$first_item = $feed['item'][0];
+$first_item = isset($feed['item'][0]) ? $feed['item'][0] : $feed['item'] ;
 if(i($first_item, 'content:encoded')) $contents = i($first_item, 'content:encoded');
 elseif(i($first_item, 'content')) $contents = i($first_item, 'content');
 else $contents = i($first_item, 'description');

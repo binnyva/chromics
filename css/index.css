@@ -2,4 +2,13 @@
 	border:1px solid #000;
 	padding:5px;
 	margin:5px;
-} 
+}
+
+form, select {
+	display:inline;
+	float:none;
+}
+
+.time {
+	float:right;
+}
