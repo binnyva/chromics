@@ -24,7 +24,7 @@ if($image_url) $type = 'embedded';
 $feed_details = array(
 	'name'	=> $feed['title'],
 	'url'	=> $feed['link'],
-	'description' => $feed['description'],
+	'description' => isset($feed['description']) ? $feed['description'] : '',
 	'feed'	=> $QUERY['feed'],
 	'type'	=> $type,
 );

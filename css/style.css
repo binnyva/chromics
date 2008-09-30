@@ -22,16 +22,51 @@ br {
 	clear:both;
 }
 
+/* Table */
+table {
+	width:100%;
+	border-collapse:collapse;
+}
+th {
+	text-align:left;
+}
+table .odd {
+	background-color:#eee;
+}
+
 /*Messages*/
 #warning-message,.warning {
-	font-weight:bold;
 	color:red;
 }
 #error-message,.error {
-	font-weight:bold;
 	color:red;
 }
 #success-message,.success {
-	font-weight:bold;
 	color:darkgreen;
+}
+	
+#warning-message,.warning, #success-message,.success,#error-message,.error {
+	font-weight:bold;
+	padding-left:18px;
+	background-repeat:no-repeat;
+	background-position:top left;
+}
+
+
+/*Icons*/
+.icon,.page-next,.page-back,.page-first,.page-last,.page-previous {
+	font-size:0px;
+	padding:10px 8px;
+	background-repeat:no-repeat;
+	background-position:top left;
+}
+.list-with-icon li,.list-with-icon dt, .with-icon {
+	padding:2px 0 2px 18px;
+	background-repeat:no-repeat;
+	background-position:top left;
+}
+.menu-with-icon li a {
+	padding-left:12px;
+	background-repeat:no-repeat;
+	background-position:top left;
 }

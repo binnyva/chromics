@@ -2,6 +2,7 @@
 <html><head>
 <title><?=$title?></title>
 <link href="<?=$abs?>css/style.css" rel="stylesheet" type="text/css" />
+<link href="<?=$abs?>images/silk_theme.css" rel="stylesheet" type="text/css" />
 <?=$css_includes?>
 </head>
 <body>
@@ -9,7 +10,7 @@
 <h1 id="logo"><a href="<?=$abs?>"><?=$title?></a></h1>
 
 <div id="top-links">
-<a href="<?=$abs?>directory.php">All Comics</a> | <a href="<?=$abs?>comics/add.php">Add Comic</a>
+<a href="<?=$abs?>comics/">All Comics</a> | <a href="<?=$abs?>comics/add.php">Add Comic</a>
 </div>
 </div>
 
@@ -33,7 +34,7 @@ include($GLOBALS['template']->template);
 
 <div id="footer">An <a href="http://www.bin-co.com/php/scripts/iframe/">iFrame</a> Application</div>
 
-<script src="<?=$abs?>js/jsl.js" type="text/javascript"></script>
+<script src="<?=$abs?>js/libraries/jsl.js" type="text/javascript"></script>
 <script src="<?=$abs?>js/application.js" type="text/javascript"></script>
 <?=$js_includes?>
 </body>

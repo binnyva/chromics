@@ -1,9 +1,16 @@
 <?php
 include('../common.php');
 
-if(!isset($QUERY['comic'])) showMessage("Please select a comic", "../directory.php", "error");
+if(!isset($QUERY['comic'])) showMessage("Please select a comic", "comics/", "error");
 
-$Comic->subscribe($QUERY['comic']);
 $comic_name = $Comic->select('name')->find($QUERY['comic']);
 
-showMessage("Subscribed to '$comic_name[name]' successfully.", "../directory.php");
+if($QUERY['action'] == 'unsubscribe') {
+	$Comic->unsubscribe($QUERY['comic']);
+	showMessage("You have unsubscribed from '$comic_name[name]'", "comics/");
+	
+} else {
+	$Comic->subscribe($QUERY['comic']);
+	showMessage("Subscribed to '$comic_name[name]' successfully.", "comics/");
+}
+

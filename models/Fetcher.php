@@ -6,19 +6,19 @@ class Fetcher {
 		$show_details = true;
 		
 		$image_extensions = array('jpg', 'jpeg', 'png', 'gif', 'bmp');
-		$all_comics = $sql->getAll("SELECT id, name, feed, url,type, last_downloaded_on FROM Comic");
+		$all_comics = $sql->getAll("SELECT id, name, feed, url,type, last_downloaded_on FROM Comic WHERE status='1'");
 		$total_comics = count($all_comics);
 		$comic_count = 1;
 		
 		foreach($all_comics as $feed) {
-																		  // if($feed['id'] != 3) continue;
+																		   // if($feed['id'] != 23) continue;
 			if($show_details) print "$comic_count/$total_comics) $feed[name] ... ";
 			$comic_count++;
 			
 			// Get the feed.
 			if(!$feed['feed']) continue;
 			$feed_details = load($feed['feed'],array(
-					'return_info'	=>	true, 					 		  // 'cache'=>true,
+					'return_info'	=>	true, 					 		   // 'cache'=>true,
 					'modified_since'=> $feed['last_downloaded_on'],
 				));
 			$feed_contents = $feed_details['body'];
@@ -46,9 +46,7 @@ class Fetcher {
 			
 			$items = $data['rss']['channel']['item'];
 			if(!isset($items[0])) $items = array($items); // Just 1 item in the feed. This is a ugly workaround for that.
-			
-
-			
+		
 			// We use a different query to get the regexps - we don't want it to be stripslashed.
 			$regexps = $sql->getAssoc("SELECT title_match_regexp, fetch_regexp FROM Comic WHERE id=$feed[id]", array('strip_slashes'=>false));
 			$feed['title_match_regexp'] = $this->escapeRegExpChars($regexps['title_match_regexp']);

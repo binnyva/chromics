@@ -1,4 +1,5 @@
 <?php
+$_SESSION['user_id'] = 1;
 
 function checkUser() {
 	global $config;
