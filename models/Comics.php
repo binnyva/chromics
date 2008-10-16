@@ -13,7 +13,7 @@ class Comics extends DBTable {
 	/**
 	 * This will create a new Comic and returns the id of the newly created row.
 	 */
-	function create($name, $feed, $url, $description='', $type='linked', $fetch_regexp='', $title_match_regexp='') {
+	function create($name, $feed, $url, $description='', $type='linked', $fetch_regexp='', $title_match_regexp='', $update_frequency=1) {
 		$validation_rules = $this->getValidationRules();
 		$validation_errors = check($validation_rules,2);
 		if($validation_errors) {
@@ -29,6 +29,7 @@ class Comics extends DBTable {
 		$this->field['type'] = $type;
 		$this->field['fetch_regexp'] = $fetch_regexp;
 		$this->field['title_match_regexp'] = $title_match_regexp;
+		$this->field['update_frequency'] = $update_frequency;
 		$this->field['added_on'] = 'NOW()';
 		return $this->save();
 	}
@@ -37,7 +38,7 @@ class Comics extends DBTable {
 	 * You can edit an existing Comic using this function. The first argument 
 	 * 		must be the id of the row to be edited
 	 */
-	function edit($id, $name, $feed, $url, $description=false, $type=false, $fetch_regexp=false, $title_match_regexp=false) {
+	function edit($id, $name, $feed, $url, $description=false, $type=false, $fetch_regexp=false, $title_match_regexp=false, $update_frequency=false) {
 		if(!$id) return -1;
 		
 		$validation_errors = check($this->getValidationRules(),2);
@@ -54,6 +55,7 @@ class Comics extends DBTable {
 		if($type !== false) $this->field['type'] = $type;
 		if($fetch_regexp !== false) $this->field['fetch_regexp'] = $fetch_regexp;
 		if($title_match_regexp !== false) $this->field['title_match_regexp'] = $title_match_regexp;
+		if($update_frequency !== false) $this->field['update_frequency'] = $update_frequency;
 
 		return $this->save();
 	}

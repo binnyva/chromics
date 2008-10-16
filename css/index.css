@@ -12,3 +12,17 @@ form, select {
 .time {
 	float:right;
 }
+
+
+/* The read items will appear a bit different */
+.read {
+	border:1px solid #000;
+	opacity: .5;
+	filter: alpha(opacity=50);
+}
+
+.active {
+	border:1px solid blue;
+	opacity: 1;
+	filter: alpha(opacity=100);
+}

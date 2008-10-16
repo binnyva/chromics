@@ -7,6 +7,11 @@ function stripSlashes(text) {
 	if(!text) return "";
 	return text.replace(/\\([\'\"])/,"$1");
 }
+
+function ajaxError() {
+	alert("Error communicating with server. Please try again");
+}
+
 function siteInit() {
 
 	$("a.confirm").click(function(e) { //If a link has a confirm class, confrm the action

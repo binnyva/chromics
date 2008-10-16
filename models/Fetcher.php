@@ -1,18 +1,26 @@
 <?php
 class Fetcher {
+	private $fetch_comics = array();
 	
 	function fetchComics() {
 		global $sql;
 		$show_details = true;
 		
 		$image_extensions = array('jpg', 'jpeg', 'png', 'gif', 'bmp');
-		$all_comics = $sql->getAll("SELECT id, name, feed, url,type, last_downloaded_on FROM Comic WHERE status='1'");
+		$where = '';
+		if($this->fetch_comics) { //User have specified a set of comics to download.
+			$all_comics = $sql->getAll("SELECT id, name, feed, url,type, last_downloaded_on FROM Comic WHERE id IN (". implode(',', $this->fetch_comics) . ')');
+		
+		} else {
+			$all_comics = $sql->getAll("SELECT id, name, feed, url, type, last_downloaded_on FROM Comic WHERE status='1' AND
+				(DATE_FORMAT(DATE_ADD(latest_comic_fetched_on, INTERVAL update_frequency DAY),'%Y-%m-%d' ) <= CURDATE() " //Check only the comics that may have been updated - ie not checked for the atleast 1 day
+				. " OR latest_comic_fetched_on='0000-00-00 00:00:00')"); 
+		}
 		$total_comics = count($all_comics);
 		$comic_count = 1;
 		
 		foreach($all_comics as $feed) {
-																		   // if($feed['id'] != 23) continue;
-			if($show_details) print "$comic_count/$total_comics) $feed[name] ... ";
+			if($show_details) print "$comic_count/$total_comics) $feed[name]($feed[id]) ... ";
 			$comic_count++;
 			
 			// Get the feed.
@@ -31,9 +39,8 @@ class Fetcher {
 			}
 			
 			// Save last_modified to the db so that we don't have to download unnecessary stuff.
-			if(isset($headers['Last-Modified'])) $last_modified = date('Y-m-d H:i:s', strtotime($headers['Last-Modified']));
-			else $last_modified = date('Y-m-d H:i:s');
-			$sql->execQuery("UPDATE Comic SET last_downloaded_on='$last_modified' WHERE id=$feed[id]");
+			
+			$sql->execQuery("UPDATE Comic SET last_downloaded_on=NOW() WHERE id=$feed[id]");
 			
 			if($show_details) print "downloaded ... ";
 			
@@ -59,8 +66,10 @@ class Fetcher {
 			
 			// Go thru all the posts in the feed and find the necessary details for the strip.
 			foreach($items as $strip) {
-				if($feed['title_match_regexp'] and !preg_match("$feed[title_match_regexp]", $strip['title'])) {
-					continue; // Make sure that this feed item is a comic - some comics have content and comic in the same feed - but they usually have a word in the title like 'Comic' to specify that its a comic.
+				
+				if($feed['title_match_regexp'] and $strip['title']){ // Make sure that this feed item is a comic - some comics have content and comic in the same feed - but they usually have a word in the title like 'Comic' to specify that its a comic.
+					if($feed['title_match_regexp'][0] == '/' and !preg_match("$feed[title_match_regexp]", $strip['title'])) continue; // its a regexp
+					else if(strpos($feed['title_match_regexp'], $strip['title'])) continue;
 				}
 				
 				if(isset($strip['guid']) and $strip['guid']) { // Make sure we dont have this comic already.
@@ -74,6 +83,7 @@ class Fetcher {
 				
 				$image_url = ''; //The comic image url.
 				$contents = '';
+				$time = date('Y-m-d H:i:s');
 				
 				if(i($strip, 'content:encoded')) $contents = i($strip, 'content:encoded');
 				elseif(i($strip, 'content')) $contents = i($strip, 'content');
@@ -120,18 +130,19 @@ class Fetcher {
 				$already_have = in_array($image_url, $image_url_of_latest_strips); // Make sure that the strip is not duplicated.
 				
 				if(!$already_have) {
-					if($show_details) print " Inserting $strip[title] ($image_url)\n";
+					if($show_details) print " Inserting $strip[title] ($image_url) Dated: $time\n";
 					$title = i($strip,'title');
 					if(is_array($title)) $title = implode('', $title);
 					if(!isset($strip['link'])) $strip['link'] = '';
 					if(!$title) $title = 'Comic for ' . date('jS M, Y', strtotime($time));
 					
+					$sql->execQuery("UPDATE Comic SET latest_comic_fetched_on='$time' WHERE id=$feed[id] AND '$time'>latest_comic_fetched_on"); //Yes, its not normalized - I know. Now shut up
 					$sql->execQuery("INSERT INTO Strip(name, image_url, url, contents, guid, added_on, comic_id) "
-						. " VALUES('" . mysql_real_escape_string($title) . "',"
-						. "'" . mysql_real_escape_string($image_url) . "'," 
-						. "'" . mysql_real_escape_string($strip['link']) . "'," 
-						. "'" . mysql_real_escape_string($contents) . "'," 
-						. "'" . mysql_real_escape_string($strip['guid']) . "','$time','$feed[id]')");
+						. " VALUES('" . $sql->escape($title) . "',"
+						. "'" . $sql->escape($image_url) . "'," 
+						. "'" . $sql->escape($strip['link']) . "'," 
+						. "'" . $sql->escape($contents) . "'," 
+						. "'" . $sql->escape($strip['guid']) . "','$time','$feed[id]')");
 					$image_url_of_latest_strips[] = $image_url;
 					if($strip['guid']) $guids_of_latest_strips[] = $strip['guid'];
 				} else {
@@ -140,6 +151,10 @@ class Fetcher {
 				}
 			}
 		}
+	}
+	
+	function getComics($id_list) {
+		$this->fetch_comics = $id_list;
 	}
 
 	/// If HTML is given as the argument, this function will find the URL of the image thats most likely to be the comic.
@@ -156,6 +171,7 @@ class Fetcher {
 				'/\/comics?\/.+\.(jpg|jpeg|png|gif)$/', // image must be in a folder called 'comic' or 'comics' - Urls like 'http://www.giantitp.com/comics/images/3394XxpGeP1I1Y6NiI0.jpg'
 			);
 		}
+		
 		foreach($comic_regexps as $re) { // Go thru each regular expression
 			foreach($images as $img) { //and thru every image
 				$url = $img->getAttribute("src");

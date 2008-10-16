@@ -22,6 +22,15 @@ br {
 	clear:both;
 }
 
+#loading {
+	position:absolute;
+	top:0;
+	left:0;
+	color:#fff;
+	padding:2px 2px 2px 20px;
+	display:none;
+}
+
 /* Table */
 table {
 	width:100%;

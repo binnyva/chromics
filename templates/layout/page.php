@@ -6,6 +6,7 @@
 <?=$css_includes?>
 </head>
 <body>
+<div id="loading">loading...</div>
 <div id="header">
 <h1 id="logo"><a href="<?=$abs?>"><?=$title?></a></h1>
 

@@ -24,10 +24,18 @@ if(isset($QUERY['comic'])) { //If viewing a single comic...
 	
 }
 else if($_SESSION['user_id']) { //If the user is just browsing, show his subscribed comics.
-	$query = "SELECT Strip.id, Strip.name, Strip.url, Strip.contents, Strip.image_url, DATE_FORMAT(Strip.added_on,'$config[time_format]') AS added_on, "
-			. " ComicTerm.comic_name, ComicTerm.comic_id, Comic.type "
-			. " FROM  ComicTerm INNER JOIN Strip INNER JOIN Comic ON Strip.comic_id=Comic.id AND ComicTerm.comic_id=Comic.id"
-			. " WHERE ComicTerm.user_id=$_SESSION[user_id] "; 
+	if(i($QUERY, 'show') == 'all') {
+		$query = "SELECT Strip.id, Strip.name, Strip.url, Strip.contents, Strip.image_url, DATE_FORMAT(Strip.added_on,'$config[time_format]') AS added_on, "
+			. " ComicTerm.comic_name, ComicTerm.comic_id "
+			. " FROM ComicTerm INNER JOIN Strip ON Strip.comic_id=ComicTerm.comic_id"
+			. " WHERE ComicTerm.user_id=$_SESSION[user_id] ";
+	} else { // Show only the unread comics.
+		$query = "SELECT Strip.id, Strip.name, Strip.url, Strip.contents, Strip.image_url, DATE_FORMAT(Strip.added_on,'$config[time_format]') AS added_on,
+				ComicTerm.comic_name, ComicTerm.comic_id
+				FROM ((ComicTerm INNER JOIN Strip ON ComicTerm.comic_id=Strip.comic_id) 
+						LEFT JOIN StripUser ON Strip.id=StripUser.strip_id AND StripUser.user_id=$_SESSION[user_id])
+				WHERE StripUser.id IS NULL AND ComicTerm.user_id=$_SESSION[user_id]";
+	}
 }
 
 //Set the order - the latest will show up at top by default.
@@ -38,4 +46,5 @@ $query .= " ORDER BY Strip.added_on $order";
 $comic_pager = new SqlPager($query, 10);
 $comic_strips = $comic_pager->getPage();
 
+$template->addResource('http://localhost/iframe/js/plugins/jsl_debug.js','js',true);
 render();
