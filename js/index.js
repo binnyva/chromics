@@ -1,15 +1,57 @@
 active_strip = 0; //The currently active strip
+loading_next_comics = false;
+reached_final_comic = false;
+extra_query = "";
+
 
 function init() {
 	$(window).on("scroll", monitor);
+	
+	//Find the options on the current page - this will be given in the ajax request to get the next strips
+	var url = location.href.toString();
+	
+	var look_for = $(["show", "comic", "order"]);
+	
+	look_for.each(function (term) {
+		var matches = url.match(term+"=([^\&]+)");
+		if(matches) extra_query += "&" + term + "=" + matches[1];
+	});
+}
+
+function loadNewStrips(html) {
+	loaded();
+	loading_next_comics = false;
+	
+	if(html == "<p>No Comics Found</p>") reached_final_comic = true;
+	else $("strips-area").innerHTML += html; // Insert the comics after the final comic.
 }
 
 function monitor() {
 	var scroll_position = window.pageYOffset || document.body.scrollTop; //Get the scrolled position
+	
+	var all_strips = $(".strip");
+	
+	if(!reached_final_comic && !loading_next_comics && 
+				scroll_position > window.scrollMaxY - 100) { //If the user have scrolled to the bottom of the page,
+		//Load the next 10 comic strips.
+		loading_next_comics = true;
+		loading();
+		
+		var strips_array = all_strips.get();
+		var final_strip = strips_array[strips_array.length - 1];
+		var added_on = final_strip.getElementsByTagName("input")[0].value;
+		
+		JSL.ajax("get_comics.php?ajax=1" + extra_query + "&added_after="+escape(added_on)).bind({
+			"onSuccess"	: loadNewStrips,
+			"onError"	: ajaxError,
+			"format"	: "html"
+		});
+	}
+	
 	var biggest_owner = 0;
 	var biggest_ownership = 0;
 	
-	$(".strip").each(function(el,i) {
+	all_strips.each(function(el,i) {
 		var ele = $(el);
 		var id = ele.id.toString().replace(/[^\d]+/g,"");
 		if(active_strip != id) {
@@ -50,7 +92,7 @@ function monitor() {
 			}
 			
 			
-			if(elements_screen_ownership == ele.clientHeight) return activateStrip(id, ele); // The strip is in the window.
+			if(elements_screen_ownership == ele.clientHeight) return activateStrip(id, ele); // The strip is fully in the window.
 			else if(elements_screen_ownership > (window.innerHeight*2/3)) return activateStrip(id, ele); //If a strip has the majority
 		}
 	});

@@ -1,5 +1,8 @@
 .strip {
-	border:1px solid #000;
+	border:3px solid #000;
+	border-radius: .5em;
+	-moz-border-radius: .5em;
+	
 	padding:5px;
 	margin:5px;
 }
@@ -16,13 +19,12 @@ form, select {
 
 /* The read items will appear a bit different */
 .read {
-	border:1px solid #000;
 	opacity: .5;
 	filter: alpha(opacity=50);
 }
 
 .active {
-	border:1px solid blue;
+	border:3px solid blue;
 	opacity: 1;
 	filter: alpha(opacity=100);
 }

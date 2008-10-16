@@ -23,12 +23,16 @@ br {
 }
 
 #loading {
-	position:absolute;
+	position:fixed;
+	background-color:#f00;
 	top:0;
 	left:0;
 	color:#fff;
-	padding:2px 2px 2px 20px;
+	padding:2px 2px 2px 2px;
 	display:none;
+	z-index:9;
+	opacity:.6;
+	filter: alpha(opacity=60);
 }
 
 /* Table */

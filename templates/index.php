@@ -34,36 +34,9 @@ if($subscribed) { ?>
 <?php
 	}
 }
-
-if(!count($comic_strips)) {
-	print "<p>No Comics Found</p>";
-	
-} else {
-showComicPager();
 ?>
 
-<?php foreach($comic_strips as $strip) {
-unset($type);
-extract($strip);
-?>
-<div class="strip unread" id="strip-<?=$id?>">
-<p class="time"><?=$added_on?></p>
-<h3><a href="<?=$url?>"><?=$name?></a></h3>
-
-<p>from <a href="index.php?comic=<?=$comic_id?>"><?=$comic_name?></a></p>
-
-<?php
-if(!isset($type)) $type = $users_subscribtions[$comic_id]['type'];
-
-if($type == 'embedded' and $contents) print $contents;
-else { ?>
-<img src="<?=$image_url?>" alt="<?=$name?>" /><br />
-<?=$contents?>
-<?php } ?>
-
+<div id="strips-area">
+<?php include('templates/get_comics.php'); ?>
 </div>
-<?php } ?>
 
-<?php showComicPager(); 
-}
-?>

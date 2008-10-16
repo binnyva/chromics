@@ -11,9 +11,15 @@ function stripSlashes(text) {
 function ajaxError() {
 	alert("Error communicating with server. Please try again");
 }
+function loading() {
+	$("loading").show();
+}
+function loaded() {
+	$("loading").hide();
+}
+
 
 function siteInit() {
-
 	$("a.confirm").click(function(e) { //If a link has a confirm class, confrm the action
 		var action = (this.title) ? this.title : "do this";
 		action = action.substr(0,1).toLowerCase() + action.substr(1); //Lowercase the first char.
