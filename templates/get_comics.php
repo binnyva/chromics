@@ -4,9 +4,11 @@ if(!count($comic_strips)) {
 	
 } else {
 
-foreach($comic_strips as $strip) {
+$show_comics = 10 > count($comic_strips) ? count($comic_strips) : 10;
+for($i=0; $i<$show_comics; $i++) {
 	unset($type);
-	extract($strip);
+	extract($comic_strips[$i]);
+	if(!$id) continue; // No ID means no strip.
 	
 	$class = 'unread';
 	if(isset($read_status) and $read_status) $class = 'read';

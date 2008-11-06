@@ -1,6 +1,6 @@
 <?php
 if(isset($QUERY['comic'])) { // Viewing a single Comic...
-	$comic_details = $comic_strips[0];
+	$comic_details = $sql->getAssoc("SELECT id as comic_id, name, description, url, feed FROM Comic WHERE id='$QUERY[comic]'");
 	
 	$subscribed = false;
 	if(isset($users_subscribtions[$comic_details['comic_id']])) { //If this comic is on the current users subscribed list,
@@ -25,12 +25,21 @@ if($subscribed) { ?>
 
 </div>
 	<?php
-} else {
+} 
 
-	if(i($_REQUEST, 'show') == 'all') { ?>
-<strong>Show All</strong>, <a href="index.php?show=unread">Show Unread</a><br />
+if(i($_REQUEST, 'show') == 'all') { ?>
+<strong>Show All</strong>, <a href="<?=getLink("index.php", array('show'=>'unread'), true)?>">Show Unread</a><br />
 <?php } else { ?>
-<a href="index.php?show=all">Show All</a>, <strong>Show Unread</strong><br />
+<a href="<?=getLink("index.php", array('show'=>'unread'), true)?>">Show All</a>, <strong>Show Unread(<?=$total_unread_comics?>)</strong><br />
+<?php
+}
+
+
+if(count($comic_strips)) { // Show this only if there are strips
+	if($order == 'DESC') { ?>
+<strong>Show Latest First</strong>, <a href="<?=getLink("index.php", array('order'=>'asc'), true)?>">Show Oldest First</a><br />
+<?php } else { ?>
+<a href="<?=getLink("index.php", array('order'=>'desc'), true)?>">Show Latest First</a>, <strong>Show Oldest First</strong><br />
 <?php
 	}
 }

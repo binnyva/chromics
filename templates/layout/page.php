@@ -35,7 +35,7 @@ include($GLOBALS['template']->template);
 
 <div id="footer">An <a href="http://www.bin-co.com/php/scripts/iframe/">iFrame</a> Application</div>
 
-<script src="<?=$abs?>js/libraries/jsl.js" type="text/javascript"></script>
+<script src="<?=$abs?>js/library/jsl.js" type="text/javascript"></script>
 <script src="<?=$abs?>js/application.js" type="text/javascript"></script>
 <?=$js_includes?>
 </body>

@@ -33,13 +33,13 @@ $order = 'DESC';
 if(isset($QUERY['order']) and strtolower($QUERY['order']) == 'asc') $order = 'ASC';
 
 if(isset($QUERY['added_after'])) { //Auto insertion paging - show only the elements added after the given time(or before - if the order is asc)
-	if($order == 'ASC') $query .= " AND Strip.added_on<'$QUERY[added_after]'";
-	else $query .= " AND Strip.added_on>'$QUERY[added_after]'";
+	if($order == 'ASC') $query .= " AND Strip.added_on>'$QUERY[added_after]'";
+	else $query .= " AND Strip.added_on<'$QUERY[added_after]'";
 }
 
-$query .= " ORDER BY Strip.added_on $order LIMIT 0, 10"; //
-
+$query .= " ORDER BY Strip.added_on $order";
 $comic_strips = $sql->getAll($query);
+$total_unread_comics = $sql->fetchNumRows();
 
 // Don't render if the file is included
 if(i($QUERY,'ajax')) {

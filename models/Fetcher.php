@@ -26,7 +26,7 @@ class Fetcher {
 			// Get the feed.
 			if(!$feed['feed']) continue;
 			$feed_details = load($feed['feed'],array(
-					'return_info'	=>	true, 					 		   // 'cache'=>true,
+					'return_info'	=>	true, 					 		    //'cache'=>true,
 					'modified_since'=> $feed['last_downloaded_on'],
 				));
 			$feed_contents = $feed_details['body'];
@@ -165,17 +165,20 @@ class Fetcher {
 			$comic_regexps = array($regexp); // If there is a specific regexp for this comic, use that - 
 		} else {
 			$comic_regexps = array( //Else use a generic regexp.
-				'/\/(comics?)?[\-\_\d]+\.(jpg|jpeg|png|gif)$/',
-				'/\/[a-zA-Z\-\_]+[\-\_\d]{2,}\.(jpg|jpeg|png|gif)$/',
-				'/\/[\-\_\d]{2,}[a-zA-Z\-\_]+\.(jpg|jpeg|png|gif)$/',
-				'/\/comics?\/.+\.(jpg|jpeg|png|gif)$/', // image must be in a folder called 'comic' or 'comics' - Urls like 'http://www.giantitp.com/comics/images/3394XxpGeP1I1Y6NiI0.jpg'
+				'/(^|\/)(comics?)?[\-\_\d]+\.(jpg|jpeg|png|gif)$/i',		// File name starts with comic(s), and then a number
+				'/(^|\/)comics?\/.+\.(jpg|jpeg|png|gif)$/i',				// Image must be in a folder called 'comic' or 'comics' - Urls like 'http://www.giantitp.com/comics/images/3394XxpGeP1I1Y6NiI0.jpg'
+				'/(^|\/)[a-z\-\_]+[\-\_\d]{2,}\.(jpg|jpeg|png|gif)$/i',		// Some chars and then a 2+ digit number
+				'/(^|\/)[\-\_\d]{2,}[a-zA-Z\-\_]+\.(jpg|jpeg|png|gif)$/i',	// A 2+ digit number - and then some chars.
 			);
 		}
 		
-		foreach($comic_regexps as $re) { // Go thru each regular expression
-			foreach($images as $img) { //and thru every image
+		foreach($images as $img) { //and thru every image
+			foreach($comic_regexps as $re) { // Go thru each regular expression
 				$url = $img->getAttribute("src");
-				if(preg_match($re, $url)) return $url; // And see if the image url matches the regexp.
+				if(preg_match($re, $url)) {
+					if(!preg_match('/[^a-z]thumbs?(nail)?s?[^a-z]/', $url) and !preg_match('/[^a-z]small[^a-z]/', $url)) //It should not be a thumbnail image. If the url has words like thumbnail, thumb, small etc., this will prevent that from being given the comic url status.
+						return $url; // And see if the image url matches the regexp.
+				}
 			}
 		}
 		return '';   
