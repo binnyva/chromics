@@ -3,8 +3,7 @@ loading_next_comics = false;
 reached_final_comic = false;
 extra_query = "";
 
-
-function init() {
+function main() {
 	$(window).on("scroll", monitor);
 	
 	//Find the options on the current page - this will be given in the ajax request to get the next strips
@@ -17,6 +16,7 @@ function init() {
 		if(matches) extra_query += "&" + term + "=" + matches[1];
 	});
 }
+main();
 
 function loadNewStrips(html) {
 	loaded();

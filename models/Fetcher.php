@@ -26,7 +26,7 @@ class Fetcher {
 			// Get the feed.
 			if(!$feed['feed']) continue;
 			$feed_details = load($feed['feed'],array(
-					'return_info'	=>	true, 					 		    //'cache'=>true,
+					'return_info'	=>	true, 					 		    'cache'=>true,
 					'modified_since'=> $feed['last_downloaded_on'],
 				));
 			$feed_contents = $feed_details['body'];
@@ -53,7 +53,7 @@ class Fetcher {
 			
 			$items = $data['rss']['channel']['item'];
 			if(!isset($items[0])) $items = array($items); // Just 1 item in the feed. This is a ugly workaround for that.
-		
+			
 			// We use a different query to get the regexps - we don't want it to be stripslashed.
 			$regexps = $sql->getAssoc("SELECT title_match_regexp, fetch_regexp FROM Comic WHERE id=$feed[id]", array('strip_slashes'=>false));
 			$feed['title_match_regexp'] = $this->escapeRegExpChars($regexps['title_match_regexp']);
@@ -66,7 +66,7 @@ class Fetcher {
 			
 			// Go thru all the posts in the feed and find the necessary details for the strip.
 			foreach($items as $strip) {
-				
+				print $strip['title'] . ": " . $strip['guid'] . "\n";
 				if($feed['title_match_regexp'] and $strip['title']){ // Make sure that this feed item is a comic - some comics have content and comic in the same feed - but they usually have a word in the title like 'Comic' to specify that its a comic.
 					if($feed['title_match_regexp'][0] == '/' and !preg_match("$feed[title_match_regexp]", $strip['title'])) continue; // its a regexp
 					else if(strpos($feed['title_match_regexp'], $strip['title'])) continue;

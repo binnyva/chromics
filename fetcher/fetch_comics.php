@@ -7,3 +7,4 @@ if($argc) {
 }
 
 $Fetcher->fetchComics();
+$sql->disconnect();

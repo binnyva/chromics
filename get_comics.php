@@ -15,18 +15,15 @@ if(isset($QUERY['comic'])) { //If viewing a single comic...
 				FROM  ((Comic INNER JOIN Strip ON Comic.id=Strip.comic_id) 
 						LEFT JOIN StripUser ON Strip.id=StripUser.strip_id AND StripUser.user_id=$_SESSION[user_id])
 				WHERE Comic.id=$QUERY[comic]";
-
+	
 } else { // View the whole subscribed list.
 	$query = "SELECT Strip.id, Strip.name, Strip.url, Strip.contents, Strip.image_url, Strip.added_on, DATE_FORMAT(Strip.added_on,'$config[time_format]') AS added_on_formated,
 				ComicTerm.comic_name, ComicTerm.comic_id, IF(StripUser.id IS NULL, 0, 1) AS read_status
 				FROM ((ComicTerm INNER JOIN Strip ON ComicTerm.comic_id=Strip.comic_id) 
 						LEFT JOIN StripUser ON Strip.id=StripUser.strip_id AND StripUser.user_id=$_SESSION[user_id])
 				WHERE ComicTerm.user_id=$_SESSION[user_id]";
-	
-	if(i($QUERY, 'show') != 'all') {// Show only the unread comics.
-		$query .= ' AND StripUser.id IS NULL';
-	}
 }
+if(i($QUERY, 'show') != 'all') $query .= ' AND StripUser.id IS NULL'; // Show only the unread comics.
 
 //Set the order - the latest will show up at top by default.
 $order = 'DESC';
