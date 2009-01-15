@@ -30,7 +30,7 @@ if($subscribed) { ?>
 if(i($_REQUEST, 'show') == 'all') { ?>
 <strong>Show All</strong>, <a href="<?=getLink("index.php", array('show'=>'unread'), true)?>">Show Unread</a><br />
 <?php } else { ?>
-<a href="<?=getLink("index.php", array('show'=>'unread'), true)?>">Show All</a>, <strong>Show Unread(<?=$total_unread_comics?>)</strong><br />
+<a href="<?=getLink("index.php", array('show'=>'all'), true)?>">Show All</a>, <strong>Show Unread(<?=$total_unread_comics?>)</strong><br />
 <?php
 }
 

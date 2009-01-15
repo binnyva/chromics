@@ -1,5 +1,10 @@
 <h1>Comics</h1>
 
+<form action="" method="post">
+<label for="search">Search</label> <input type="text" name="search" id="search" />
+<input type="submit" value="Go" name="action" />
+</form>
+
 <table>
 <tr><th>Comic</th><th>Subscibe</th><th>Site</th><th colspan="2">Actions</th></tr>
 <?php
