@@ -115,8 +115,8 @@ function activateStrip(id, ele) {
 			ele.removeClass("unread");
 		},
 		"onError": ajaxError,
-		format: "json",
-		loading_indicator: "loading"
+		format: "json"
+		//loading_indicator: "loading"
 	});
 	return true; //Returning something will exit the each loop
 }
