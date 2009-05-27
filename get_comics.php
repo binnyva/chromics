@@ -1,7 +1,7 @@
 <?php
 require_once('common.php');
 
-$query = ''; //Yes, query is made my concating strings is this case. Not ideal, but it works
+$query = ''; //Yes, query is made my concatinating strings is this case. Not ideal, but it works
 
 // Get name and id of all user subscribed feeds.
 $users_subscribtions = array();
@@ -26,8 +26,8 @@ if(isset($QUERY['comic'])) { //If viewing a single comic...
 if(i($QUERY, 'show') != 'all') $query .= ' AND StripUser.id IS NULL'; // Show only the unread comics.
 
 //Set the order - the latest will show up at top by default.
-$order = 'DESC';
-if(isset($QUERY['order']) and strtolower($QUERY['order']) == 'asc') $order = 'ASC';
+$order = 'ASC';
+if(isset($QUERY['order']) and strtolower($QUERY['order']) == 'desc') $order = 'DESC';
 
 if(isset($QUERY['added_after'])) { //Auto insertion paging - show only the elements added after the given time(or before - if the order is asc)
 	if($order == 'ASC') $query .= " AND Strip.added_on>'$QUERY[added_after]'";
