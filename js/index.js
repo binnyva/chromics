@@ -2,9 +2,11 @@ active_strip = 0; //The currently active strip
 loading_next_comics = false;
 reached_final_comic = false;
 extra_query = "";
+all_strips = [];
 
 function main() {
 	$(window).on("scroll", monitor);
+	all_strips = $(".strip");
 	
 	//Find the options on the current page - this will be given in the ajax request to get the next strips
 	var url = location.href.toString();
@@ -15,6 +17,7 @@ function main() {
 		var matches = url.match(term+"=([^\&]+)");
 		if(matches) extra_query += "&" + term + "=" + matches[1];
 	});
+	document.location.href="#header";
 }
 main();
 
@@ -24,12 +27,12 @@ function loadNewStrips(html) {
 	
 	if(html == "<p>No Comics Found</p>") reached_final_comic = true;
 	else $("strips-area").innerHTML += html; // Insert the comics after the final comic.
+	
+	all_strips = $(".strip"); // Caches the strips
 }
 
 function monitor() {
 	var scroll_position = window.pageYOffset || document.body.scrollTop; //Get the scrolled position
-	
-	var all_strips = $(".strip");
 	
 	if(!reached_final_comic && !loading_next_comics && 
 				scroll_position > window.scrollMaxY - 100) { //If the user have scrolled to the bottom of the page,

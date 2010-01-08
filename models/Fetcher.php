@@ -194,10 +194,8 @@ class Fetcher {
 	
 	/// If the HTML is given, it will return all the img tags.
 	function findAllImages($html) {
-		error_reporting(0); // Suppress the invalid HTML warnings
 		$dom = new domDocument;
-		$dom->loadHTML($html);
-		error_reporting(E_ALL);
+		@$dom->loadHTML($html);
 		$dom->preserveWhiteSpace = false;
 		return $dom->getElementsByTagName('img');
 	}
